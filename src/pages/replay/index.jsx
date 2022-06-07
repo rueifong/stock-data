@@ -9,11 +9,11 @@ const ReplayChart = () => {
 
   return (
     <div>
-      <DisplayChart
+      {/* <DisplayChart
         isResetChart={isResetChart}
         setIsResetChart={setIsResetChart}
         stock={replayStockId ? { id: replayStockId } : {}}
-      />
+      /> */}
       <Simulator
         onReset={() => {
           setIsResetChart(true);

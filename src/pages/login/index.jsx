@@ -40,7 +40,7 @@ const Login = ({ setToken, setPermission }) => {
               );
               setToken(res.data.token);
               setPermission(res.data.permission);
-              history.replace("/stock-font-end/");
+              history.replace("/");
             })
             .catch((err) => {
               errorNotification(err?.response?.data);

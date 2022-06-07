@@ -4,4 +4,11 @@ module.exports = {
       plugins: [require("tailwindcss"), require("autoprefixer")],
     },
   },
+  webpack: {
+    configure: {
+      output: {
+        publicPath: ''
+      },
+    },
+  },
 };

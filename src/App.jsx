@@ -1,6 +1,6 @@
 import "antd/dist/antd.css";
 
-import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import EchartExample from "./pages/echart-example";
 import Main from "./pages/main";
@@ -63,9 +63,9 @@ const App = () => {
   // }, [router]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="flex ">
-        {<RouterLink setToken={setToken} permission={['Q1-chart', 'replay-chart']} />}
+        {<RouterLink setToken={setToken} permission={['replay-chart']} />}
         <div className="flex-1 my-10 ">
           <Switch>
             {/* <Route
@@ -74,15 +74,15 @@ const App = () => {
                 <Login setToken={setToken} setPermission={setPermission} />
               )}
             /> */}
-            <Route path="/stock-font-end/" exact component={Main} />
-            <GuardedRoute
-              path="/stock-font-end/echart-example"
+            <Route path="/" exact component={Main} />
+            <Route
+              path="/echart-example"
               component={EchartExample}
             />
-            {['Q1-chart', 'replay-chart'].map((data) => (
-              <GuardedRoute
+            {['replay-chart'].map((data) => (
+              <Route
                 key={Math.random()}
-                path={`/stock-font-end/${data}`}
+                path={`/${data}`}
                 component={AUTH_MAPPING_DATA[data]}
               />
             ))}
@@ -93,7 +93,7 @@ const App = () => {
           </Switch>
         </div>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

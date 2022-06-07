@@ -31,7 +31,7 @@ const LINK_MAPPING_DATA = {
   "investor-management": "帳戶管理",
   "role-management": "角色管理",
   "Q1-chart": "Q1 圖表",
-  "replay-chart": "重播紀錄",
+  "replay-chart": "接取資料",
   case: "情境管理",
   simulator: "模擬下單",
   "quick-order": "閃電下單",

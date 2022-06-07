@@ -11,7 +11,7 @@ const RouterLink = ({ setToken, permission }) => {
   const history = useHistory();
   return (
     <ul className="sticky px-4 bg-gray-200 w-48 flex-shrink-0 min-h-screen">
-      <li className=" text-center text-xl border-b border-black">
+      {/* <li className=" text-center text-xl border-b border-black">
         <Button
           className="w-full"
           size="large"
@@ -25,24 +25,16 @@ const RouterLink = ({ setToken, permission }) => {
               })
               .finally((res) => {
                 setToken(null);
-                history.replace("/stock-font-end/login/");
+                history.replace("/login/");
               });
           }}
         >
           登出
         </Button>
-      </li>
-      <li className=" py-5 text-xl border-b border-black">
-        <NavLink to="/stock-font-end/" exact>
-          首頁
-        </NavLink>
-      </li>
-      <li className="py-5 text-xl border-b border-black">
-        <NavLink to="/stock-font-end/echart-example">範例</NavLink>
-      </li>
+      </li> */}
       {permission.map((data) => (
-        <li className="py-5 text-xl border-b border-black" key={Math.random()}>
-          <NavLink to={`/stock-font-end/${data}`}>
+        <li className="py-5 text-xl" key={Math.random()}>
+          <NavLink to={`/${data}`}>
             {LINK_MAPPING_DATA[data]}
           </NavLink>
         </li>
