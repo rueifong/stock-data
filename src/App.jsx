@@ -74,15 +74,15 @@ const App = () => {
                 <Login setToken={setToken} setPermission={setPermission} />
               )}
             /> */}
-            <Route path="/" exact component={Main} />
+            {/* <Route path="/" exact component={Main} />
             <Route
               path="/echart-example"
               component={EchartExample}
-            />
+            /> */}
             {['replay-chart'].map((data) => (
               <Route
                 key={Math.random()}
-                path={`/${data}`}
+                path={`/`}
                 component={AUTH_MAPPING_DATA[data]}
               />
             ))}
