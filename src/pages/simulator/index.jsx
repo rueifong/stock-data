@@ -5,6 +5,7 @@ import { api, defaultAxios } from "../../environment/api";
 import errorNotification from "../../utils/errorNotification";
 import moment from "moment";
 import dayjs from "dayjs";
+import { CSVDownloader } from "react-papaparse";
 
 const { TabPane } = Tabs;
 
@@ -59,12 +60,6 @@ const sendOrder = ({ id, realDataOrderId, ...order }) => {
       investorId: null,
     },
   });
-};
-
-const debugOrders = (orders, type) => {
-  if (false) {
-    console.log(type, orders);
-  }
 };
 
 export const OrderSender = ({ orders, stockId, onReset }) => {
@@ -261,7 +256,6 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
   const [startDate, setStartDate] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  debugOrders(orders, "real");
 
   // useEffect(() => {
   //   if (stockId) {
@@ -319,7 +313,7 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
   
   return (
     <div>
-      <div className="flex justify-around my-6 items-center">
+      <div className="flex justify-around my-6 px-6 items-center">
         {/* <div className="w-1/6">
           選擇資料類型
           <Select
@@ -365,16 +359,12 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
             disabled={!stockId && availableDate.length == 0}
             disabledDate={(current) => {
               const transferedCurrent = current && current.startOf("day");
-              const transferedEndTime = endTime && endTime;
               return (
                 (transferedCurrent && transferedCurrent > moment()) ||
                 (transferedCurrent &&
                   !availableDate.includes(
                     transferedCurrent.format("YYYY-MM-DD")
-                  )) ||
-                (transferedEndTime && transferedCurrent > transferedEndTime) ||
-                (transferedEndTime &&
-                  transferedEndTime.diff(transferedCurrent) / 86400000 >= 5)
+                  ))
               );
             }}
             onChange={(time, day) => {
@@ -388,8 +378,7 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
             picker="time"
             disabled={!stockId}
             onChange={(e, time) => {              
-              console.log('startDate1', startDate)
-              const dateTime = new Date(startDate + ' ' + time).getTime();
+              const dateTime = new Date(startDate + ' ' + time).getTime() + '000';
               setStartTime(dateTime);
             }}
           />
@@ -400,15 +389,14 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
             picker="time"
             disabled={!stockId}
             onChange={(e, time) => {              
-              console.log('startDate2', startDate)
-              const dateTime = new Date(startDate + ' ' + time).getTime();
+              const dateTime = new Date(startDate + ' ' + time).getTime() + '000';
               setEndTime(dateTime);
             }}
           />
         </div>
         
-        <div>
-          &nbsp;
+        <div className="w-1/6">
+          &nbsp;<br />
           <Button
             type="primary"
             danger
@@ -443,9 +431,8 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
                   setOrders(
                     data.data.map((v) => {
                       return {
-                        ...v,
-                        investorId: null,
                         stockId: tempStockId,
+                        ...v,
                       };
                     })
                   );
@@ -486,8 +473,22 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
             載入委託
           </Button>
         </div>
+        <div className="w-1/6">
+          &nbsp;<br />
+          <CSVDownloader
+            // type={Button}
+            filename={'filename'}
+            bom={true}
+            config={{
+              delimiter: ',',
+            }}
+            data={orders}
+          >
+            Download CSV
+          </CSVDownloader>
+        </div>
       </div>
-      <OrderSender orders={orders} stockId={stockId} onReset={onReset} />
+      {/* <OrderSender orders={orders} stockId={stockId} onReset={onReset} /> */}
     </div>
   );
 };
