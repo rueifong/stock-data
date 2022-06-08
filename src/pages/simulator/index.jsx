@@ -284,11 +284,11 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
       // setIsLoading(true);
       // const { url, method } = getRealDataAvailableAPI(marketType);
       return defaultAxios({
-        url: 'https://140.118.118.173/api/v1/getStockData',
+        url: 'http://140.118.118.173:13278/api/v1/getStockData',
         credentials: 'include',
         method: 'GET',
         headers: new Headers({
-          'access-control-allow-origin': '*',
+          // 'access-control-allow-origin': '*',
           'Content-Type': 'application/json'
         }),
         params: {
@@ -411,11 +411,11 @@ const RealDataSimulator = ({ customResetStock, onReset }) => {
               // }
 
               defaultAxios({
-                url: 'https://140.118.118.173/api/v1/getStockData',
+                url: 'http://140.118.118.173:13278/api/v1/getStockData',
                 credentials: 'include',
                 method: 'GET',
                 headers: new Headers({
-                  'access-control-allow-origin': '*',
+                  // 'access-control-allow-origin': '*',
                   'Content-Type': 'application/json'
                 }),
                 params: {
